@@ -1,8 +1,10 @@
-import Canvas from "./Component/Canvas/Canvas";
+import './App.css';
+import DrawingCanvas from './Component/Canvas/Canvas';
 function App() {
-  return( 
-  <Canvas/>
-  )
+  return (
+    <DrawingCanvas></DrawingCanvas>
+    
+  );
 }
 
 export default App;

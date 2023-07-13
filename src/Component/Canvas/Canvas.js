@@ -33,7 +33,7 @@ import './Canvas.css';
 //         if(!isDrawing) {
 //             return;
 //         }
-        
+
 //         const {offsetX, offsetY} = nativeEvent;
 //         contextRef.current.lineTo(offsetX, offsetY);
 //         contextRef.current.stroke();
@@ -87,75 +87,75 @@ import './Canvas.css';
 import React, { useRef } from 'react';
 
 function CanvasDownload() {
-  const canvasRef = useRef(null);
+    const canvasRef = useRef(null);
 
-  const handleDownload = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    const imageData = ctx.getImageData(0, 0, 16, 34);
-    const pixelData = imageData.data;
+    const handleDownload = () => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+        const imageData = ctx.getImageData(0, 0, 16, 34);
+        const pixelData = imageData.data;
 
-    // Convert pixel data to hex format
-    let hexData = '';
-    for (let i = 0; i < pixelData.length; i += 4) {
-      const r = pixelData[i];
-      const g = pixelData[i + 1];
-      const b = pixelData[i + 2];
-      const hex = rgbToHex(r, g, b);
-      hexData += hex;
-    }
+        // Convert pixel data to hex format
+        let hexData = '';
+        for (let i = 0; i < pixelData.length; i += 4) {
+            const r = pixelData[i];
+            const g = pixelData[i + 1];
+            const b = pixelData[i + 2];
+            const hex = rgbToHex(r, g, b);
+            hexData += hex;
+        }
 
-    // Create a file with the hex data
-    const blob = new Blob([hexData], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'canvas_data.txt';
-    link.click();
-  };
+        // Create a file with the hex data
+        const blob = new Blob([hexData], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'canvas_data.txt';
+        link.click();
+    };
 
-  const rgbToHex = (r, g, b) => {
-    const hex = ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
-    return '#' + hex;
-  };
+    const rgbToHex = (r, g, b) => {
+        const hex = ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
+        return '#' + hex;
+    };
 
-  const drawCharacter = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const drawCharacter = () => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
 
-    // Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Set font and color
-    const font = '24px Arial'; // You can change the font family and size here
-    const color = '#FF0000'; // You can change the font color here
+        // Set font and color
+        const font = '24px Arial'; // You can change the font family and size here
+        const color = '#FF0000'; // You can change the font color here
 
-    // Center alignment
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
+        // Center alignment
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
 
-    // Calculate the center coordinates
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
+        // Calculate the center coordinates
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
 
-    // Draw the character
-    ctx.font = font;
-    ctx.fillStyle = color;
-    ctx.fillText('A', centerX, centerY); // You can change the character here
-  };
+        // Draw the character
+        ctx.font = font;
+        ctx.fillStyle = color;
+        ctx.fillText('A', centerX, centerY); // You can change the character here
+    };
 
-  // Call drawCharacter when the component is mounted
-  React.useEffect(() => {
-    drawCharacter();
-  }, []);
+    // Call drawCharacter when the component is mounted
+    React.useEffect(() => {
+        drawCharacter();
+    }, []);
 
-  return (
-    <div>
-      <canvas className="canvas-container"
-      ref={canvasRef} width={16} height={34}></canvas>
-      <button onClick={handleDownload}>Download</button>
-    </div>
-  );
+    return (
+        <div>
+            <canvas className="canvas-container"
+                ref={canvasRef} width={16} height={34}></canvas>
+            <button onClick={handleDownload}>Download</button>
+        </div>
+    );
 }
 
 export default CanvasDownload;

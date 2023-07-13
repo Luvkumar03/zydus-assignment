@@ -128,7 +128,7 @@ function CanvasDownload() {
 
         // Set font and color
         const font = '24px Arial'; // You can change the font family and size here
-        const color = '#FF0000'; // You can change the font color here
+        const color = 'white'; // You can change the font color here
 
         // Center alignment
         ctx.textAlign = 'center';
